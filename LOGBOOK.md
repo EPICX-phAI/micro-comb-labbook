@@ -185,4 +185,40 @@ Next Steps:
 
 ## 30-10-2026 - SESSION: Writing up of previous notes into electronic lab book
 - went over and translated notes from physical lab book into electronic lab book for future reference
-- Commit: code []
+- Commit: code [9b2eebc]
+
+## 16-11-2026 - SESSION: WP0, settings consistency and metric heatmaps
+**Aim:** to finish WP0: compute all three heatmaps using identical settings, interpret them and check for any issues
+
+**Settings**
+- Peak-finding settings changed as given by co-supervisor: 'height = -65 dBm', 'prominence = 6 dB', 'distance = 17'. Window 1520-1575 nm
+- **Bug** settings were saved from previous run, so code from '20-10-2026-N_RF_plots.ipynb' was re-run to save heatmaps with new settings
+- All three maps computed successfully 
+
+**Check**
+- RF acquisition for all maps: 'PD_Deltaf' = 5kHz, 100,000 samples
+- set OSA window lies within all map ranges
+
+**Heatmaps** ('figures/MAP0x_metric_maps.png')
+- MAP00: noisy region upper left; soliton tongue at delay ~150-260 micro m, pump > 600mW (N ~80-110); CW below diagonal edge (N ~0-10)
+- MAP01/02: measurements look reproducible between runs; both differ from MAP00: higher noise floor
+
+**Notes**
+- Higher noise floor for MAP01/02 is not due to processing/acquisition settings: Assumed as lower optical power on PD, so detector noise contributes to floor
+- mu2/mu4 are dominated by OSA noise floor. Kept as is for now; test with/without in WP3
+
+**Next session: WP1**
+1. **Redraw Fig. 4 separators** on MAP00 with new N values. Record coords and freeze them, must not be adjusted
+2. **Apply lines to all three maps**: use same lines as well as recalibrated lines to test transferability
+3. **Internal checks**:
+    - label maps in pump x delay: connected or scattered 
+    - agreement between sigma, P_AC, p_AC separators
+    - sensitivity; see affect of moving lives, observe changes in class
+    - MAP01 vs MAP02 label maps
+4. **Fix class definitions** for labelling (CW / soliton / other, with written criteria)
+5. **Choose eye-label sample as reference:**
+    - random, ~50 per map -> unbiased
+    - targeted: ambiguous class-boundary cells
+    - report both separately 
+6. **Eye-labelling tool** (shown spectra, threshold label hidden) -> CSV
+7. **Compare methods of labelling:** confusion matrix + Cohen's kappa, threshold vs eye labels
