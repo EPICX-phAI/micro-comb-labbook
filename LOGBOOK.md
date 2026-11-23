@@ -170,7 +170,7 @@ Next Steps:
 ## 25-10-2026 - READING: Suresh et al Continued
 - Notes: 'reading/suresh2026_minimal-observables.md'
 - Lab book p. 31
-- Commit: [cd3fc10]
+- Commit: code [cd3fc10]
 
 ## 25-10-2026 - READING: Practical challenges for lit review
 - label noise, class imbalance, leakage, spectral preprocessing 
@@ -205,7 +205,7 @@ Next Steps:
 
 **Notes**
 - Higher noise floor for MAP01/02 is not due to processing/acquisition settings: Assumed as lower optical power on PD, so detector noise contributes to floor
-- mu2/mu4 are dominated by OSA noise floor. Kept as is for now; test with/without in WP3
+- mu2/mu4 are dominated by OSA inoise floor. Kept as is for now; test with/without in WP3
 
 **Next session: WP1**
 1. **Redraw Fig. 4 separators** on MAP00 with new N values. Record coords and freeze them, must not be adjusted
@@ -222,3 +222,21 @@ Next Steps:
     - report both separately 
 6. **Eye-labelling tool** (shown spectra, threshold label hidden) -> CSV
 7. **Compare methods of labelling:** confusion matrix + Cohen's kappa, threshold vs eye labels
+
+Commit: code [c02b3e3]
+
+## 18-11-2026 - SESSION: close WP0, WP1 separators v1
+*(Written up 23-11-2026)*
+**Aim:** close WP0, redraw Fig. 4 separators with new settings, freeze, and apply to all maps
+
+- **Peak check** (`figures/2026-11-18_peak_check.png`): N matches visible lines on all maps. Caveat: occasional false peak on the MAP01/02 background hump (+1 on some CW cells, no effect on labels). Settings kept. **WP0 complete.**
+- **Separators v1, frozen on MAP00** (`data/separators_v1.json`): CW line moved 8 → 5.5 (empty N bins 5–6); σ, P_AC, p_AC diagonals unchanged. Not to be changed after hand labelling.
+- **Code:** `plot_N_vs_RF` takes separators as an argument; `src/labels.py` → `threshold_labels()` (one label set per RF metric).
+- **Applied to all maps** → `data/threshold_labels_v1.npz`, `figures/2026-11-18_threshold_label_maps_v1.png`.
+- **Flagged:** few-line column at N ≈ 8–15; two P_AC groups on the soliton side; generous σ line at high N.
+
+## 19-11-2026 - MEETING: Co-supervisor
+- Paper's separators were placed by eye; parameters may need tuning per dataset (should still work, less accurately).
+- Solitons are the class of interest; "other" not very useful.
+- Could use the paper's 4 classes and split further; splitting "other" (broad / narrow unstable) as data exploration or class-imbalance work.
+- **Actions:** soliton-focused evaluation (precision / recall); fine labels based on the paper's 4 classes; keep frozen vs recalibrated comparison; decide metric combination in step 3.
