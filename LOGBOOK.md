@@ -188,6 +188,7 @@ Next Steps:
 - Commit: code [9b2eebc]
 
 ## 16-11-2026 - SESSION: WP0, settings consistency and metric heatmaps
+Notebook: 'notebooks/2026-11-16_heatmaps.ipynb'
 **Aim:** to finish WP0: compute all three heatmaps using identical settings, interpret them and check for any issues
 
 **Settings**
@@ -226,6 +227,7 @@ Next Steps:
 Commit: code [c02b3e3]
 
 ## 18-11-2026 - SESSION: close WP0, WP1 separators v1
+Notebook: 'notebooks/2026-11-18_wp1_separators.ipynb'
 *(Written up 23-11-2026)*
 **Aim:** close WP0, redraw Fig. 4 separators with new settings, freeze, and apply to all maps
 
@@ -240,3 +242,25 @@ Commit: code [c02b3e3]
 - Solitons are the class of interest; "other" not very useful.
 - Could use the paper's 4 classes and split further; splitting "other" (broad / narrow unstable) as data exploration or class-imbalance work.
 - **Actions:** soliton-focused evaluation (precision / recall); fine labels based on the paper's 4 classes; keep frozen vs recalibrated comparison; decide metric combination in step 3.
+- Commit: code [12618cd]
+
+## 23-11-2026 - SESSION: WP1, threshold labels, agreement, recalibrated separators
+Notebook: 'notebooks/2026-11-23_wp1_label_maps.ipynb'
+**Aim:** Apply the frozen separators defined on MAP00 to all three maps and assess consistency
+
+**Code**
+- 'src/labels.py': 'thresh_labels()' (one label set per RF metric), 'agreement()', 'combine_labels'
+- Bugs fixed: 'line_value' missing division by (x_2 - x_1); soliton condition '>' -> '<'
+
+**Separators v1 on all maps**
+- MAP00 label matches Suresh Fig. 4. MAP01/02: main soliton tongue observed; extra soliton region at delay 300-400 micrometers (sigma and p_AC only)
+- Ambiguous share of soliton votes: MAP00 14%, MAP01 64%, MAP02 58%
+
+**Recalibrated separators (per map, frozen 23-11-2026)**
+- MAP01/02: quiet row at raised RF floor, soliton cluster at N ~ 55-85 at same RF level -> solitons separated by N, not RF. v1 diagonals cut into quiet row -> false solitons
+- 'data/separators_v1_MAP01.json', '..._MAP02.json': CW = 4.5; steep diagonals through N gap (~52-57)
+- 300-400 micrometer region removed; near-perfect agreement; possible missed solitons at tongue edges
+
+**Next Session:** 
+- General vs tuned x3 combination rules, evaluated against one set of eye labels (soliton precision/recall, kappa)
+- Class definitions -. sample selection -> labelling tool.
