@@ -236,8 +236,10 @@ Notebook: 'notebooks/2026-11-18_wp1_separators.ipynb'
 - **Code:** `plot_N_vs_RF` takes separators as an argument; `src/labels.py` → `threshold_labels()` (one label set per RF metric).
 - **Applied to all maps** → `data/threshold_labels_v1.npz`, `figures/2026-11-18_threshold_label_maps_v1.png`.
 - **Flagged:** few-line column at N ≈ 8–15; two P_AC groups on the soliton side; generous σ line at high N.
+- Commit: code [12618cd]
 
 ## 19-11-2026 - MEETING: Co-supervisor
+*(Written up 23-11-2026)*
 - Paper's separators were placed by eye; parameters may need tuning per dataset (should still work, less accurately).
 - Solitons are the class of interest; "other" not very useful.
 - Could use the paper's 4 classes and split further; splitting "other" (broad / narrow unstable) as data exploration or class-imbalance work.
@@ -264,3 +266,25 @@ Notebook: 'notebooks/2026-11-23_wp1_label_maps.ipynb'
 **Next Session:** 
 - General vs tuned x3 combination rules, evaluated against one set of eye labels (soliton precision/recall, kappa)
 - Class definitions -. sample selection -> labelling tool.
+
+- Commit: code [40b68d8]
+
+# 26-11-2026 - MEETING: Supervisor + Co-supervisor
+- Questions:
+    - Is this sort of "tuning" correct
+    * find_peaks may need tuning
+
+    - As a result of this re-tuning is this what might necessitate resampling later on (WP5)
+    * discuss the physical effects between the experimental configurations 
+    * assess how similar each soliton spectra is (could use for example IQR, define a boundary region for soliton class? (qualitatively))
+    * (Fisher score/Mutual Information score)
+    * As a result of the need of a *physics* discussion, possibly adjust size of class definitions work package and go deeper into statistical analysis of quality of class definitions (with an emphasis on soliton retrieval) and a physical explanation of data resampling/normalisation, with reference to the experimental setup
+
+    * double check definition of prominence
+
+- **Plan revised after supervisor meeting:**
+    * WP2 refocus: robustness of class definitions (especially soliton) across maps. Soliton feature IQRs / mean spectra per map; Fisher score / mutual information per feature per map; physics of setup differences -> normalisation rationale; optional tuned find_peaks; splitting "other" now optional. Extended to S2 W2.
+    * WP3a/b shifted ~1 week; feature set and normalisation to be chosen from WP2.
+    * WP6 lighter (setup physics now in WP2); CNN occlusion is first to cut if need be.
+    * WP1 unchanged; eye labels are blind, so they can be reused to score any later threshold version.
+
